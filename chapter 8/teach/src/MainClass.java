@@ -28,7 +28,7 @@ public class MainClass {
 
         personList
                 .stream()
-                .map(person -> person.lastName())
+                .map(person -> person.lastName)
                 .forEach(lastName -> System.out.println(lastName));
     }
 }
