@@ -1,45 +1,60 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainClass {
-    public static void main(String[] args) throws IOException{
-        String wordToEncript="world";
-        String encriptedWord="";
-        String decriptedWord="";
-        Caesar caesar = new Caesar();
 
+    public static void main(String[] args) throws IOException {
+        String stringFile = "";
+        String dataFile = "test.txt";
+        String encriptedFile = "encripted.txt";
+        BufferedReader inputFile = null;
+        String encriptedWord = "";
         int key = 1;
 
-        for(int i=0;i<wordToEncript.length();i++){
-            char c=wordToEncript.charAt(i);
-            caesar.Caesar(c,key);
-            c=caesar.encriptedChar;
-            encriptedWord=encriptedWord+c;
+        //Read from file to string
+        try {
+            inputFile = new BufferedReader(new FileReader(dataFile));
+        } catch (FileNotFoundException e) {
+            System.out.println("File \"" + dataFile + "\" not found");
+            return;
         }
-
-        System.out.println("Encripted word = "+encriptedWord);
-
-        for(int i=0;i<encriptedWord.length();i++){
-            char c=encriptedWord.charAt(i);
-            caesar.Caesar(c,-key);
-            c=caesar.encriptedChar;
-            decriptedWord=decriptedWord+c;
+        List<String> list = new ArrayList<String>();
+        try {
+            while ((stringFile = inputFile.readLine()) != null)
+                list.add(stringFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println("Decripted word = "+decriptedWord);
+        for (String tmp : list) {
+            stringFile = tmp;
+        }
+        System.out.println(stringFile);
 
-            try(final FileInputStream in = new FileInputStream("test.txt");
-                FileOutputStream out = new FileOutputStream("encriptedTest.txt");){
-                int c;
+        //Encripted string from file
+        Caesar caesar = new Caesar();
+        for (int i = 0; i < stringFile.length(); i++) {
+            char c = stringFile.charAt(i);
+            caesar.Caesar(c, key);
+            c = caesar.encriptedChar;
+            encriptedWord = encriptedWord + c;
+        }
+        System.out.println("Encripted word = " + encriptedWord);
 
-                while((c=in.read()) != -1){
-                  out.write(c);
-                }
-            }
 
+     //Save encripted string to new file
+        try(FileWriter writer = new FileWriter(encriptedFile, false))
+        {
+            writer.write(encriptedWord);
+            writer.append('\n');
+            writer.append('E');
+            writer.flush();
+        }
+        catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
 
 
     }
-
-
 }
+
