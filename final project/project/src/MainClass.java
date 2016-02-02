@@ -1,9 +1,10 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainClass {
 
-    public static void main(String[] args){
-//     String function="sin(x)";
+    public static void main(String[] args) throws IOException{
+// Function set in function "Function"
 //  Coordinate of middle segment AB
      double x = 0.0;
 //  Coordinate X of start point
@@ -17,8 +18,13 @@ public class MainClass {
      double epsilon = 0.005;
 
      Scanner scaner = new Scanner(System.in);
+
      System.out.print("Please input coordinate X of point A:");
-     A=scaner.nextDouble();
+     try {
+         A=scaner.nextDouble();
+     } catch (){
+         
+     }
      System.out.print("Please input coordinate X of point B:");
      B=scaner.nextDouble();
      double aInput=A;
@@ -38,7 +44,7 @@ public class MainClass {
      B=bInput;
      x = (A+B)/2;
      System.out.print("Minimum function in point x= "+x);
-     System.out.println(".   Minimum of function sin(x) = "+Function(x));
+     System.out.println(".   Minimum of function x^2 = "+Function(x));
 
 //Find of maximum value of function
      x=0.0;
@@ -55,15 +61,13 @@ public class MainClass {
     }
     x = (A+B)/2;
     System.out.print("Maximum function in point x= "+x);
-    System.out.println(".   Maximum of function sin(x) = "+Function(x));
-
-
+    System.out.println(".   Maximum of function x^2 = "+Function(x));
     }
 
 
 
     public static double Function(double x){
-        double functionX=Math.sin(x);
+        double functionX=Math.pow(-x,2);
         return functionX;
     }
 
