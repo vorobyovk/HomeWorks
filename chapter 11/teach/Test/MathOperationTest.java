@@ -1,4 +1,6 @@
-import org.junit.Assert;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class MathOperationTest {
 
@@ -9,7 +11,16 @@ public class MathOperationTest {
         MathOperation math = new MathOperation();
         int result = math.add(A,B);
 
-        Assert.assertEquals(result,6);
+        assertEquals(result,6);
+    }
+    @Test
+    public void testMult() throws Exception{
+      int a=10;
+        int b=3;
+        MathOperation math = new MathOperation();
+        int result = math.multiply(a,b);
+
+        assertEquals(a*b,result);
 
     }
 }
